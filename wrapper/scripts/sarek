@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+""" Sarek: Helper tools for use with the Sarek Nextflow pipeline. """
+
+from __future__ import print_function
+
+import click
+import sys
+
+import sarek, sarek.check, sarek.run
+
+import logging
+logging.basicConfig(level=logging.INFO)
+
+@click.group(chain=True)
+@click.version_option(sarek.__version__)
+def sarek_cli():
+    pass
+
+@sarek_cli.command()
+def check(ctx):
+    """Check that all requirements are installed"""
+    sarek.check.check(quiet=False)
+
+@sarek_cli.command()
+@click.option('--dryrun',
+                is_flag=True,
+                help="Don't launch any pipelines, just print commands"
+)
+@click.option('--noreport',
+                is_flag=True,
+                help="Don't generate reports"
+)
+@click.option('--type', 'runtype',
+                required=True,
+                type=click.Choice(['germline', 'somatic']),
+                help="Type of run"
+)
+@click.argument('steps',
+                required=True,
+                nargs=-1
+)
+def run(dryrun, noreport, runtype, steps):
+    """Run Sarek"""
+    print("Run the pipeline")
+
+    # Quietly check that we have everything that we need
+    sarek.check.check()
+
+    # Check that the specified steps are valid
+    allowed_steps = ['map', 'realign', 'recalibrate', 'annotate', 'variantcall', 'qc']
+    for s in steps:
+        if s not in allowed_steps:
+            logging.critical("Step '{}' not recognised!".format(s))
+            sys.exit(1)
+
+    # Create a config object
+    tsv_path = None
+    sarek_obj = sarek.run.Sarek(tsv_path)
+
+    # Run the pipeline
+    if 'map' in steps:
+        print("Running mapping")
+        sarek_obj.map()
+    if 'annotate' in steps:
+        print("Running annotation")
+        sarek_obj.annotate()
+    if 'qc' in steps:
+        print("Running qc")
+
+
+
+if __name__ == '__main__':
+    sarek_cli(obj={})
