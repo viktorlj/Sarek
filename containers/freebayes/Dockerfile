@@ -2,7 +2,7 @@ FROM debian:8.9
 
 LABEL \
   author="Maxime Garcia" \
-  description="FreeBayes image for use in CAW" \
+  description="FreeBayes image for use in Sarek" \
   maintainer="maxime.garcia@scilifelab.se"
 
 # Install libraries
@@ -28,6 +28,3 @@ RUN \
   && make install \
   && cd .. \
 && rm -rf freebayes
-
-# Create UPPMAX directories
-RUN mkdir /pica /proj /scratch /sw

@@ -2,7 +2,7 @@ FROM openjdk:8-slim
 
 LABEL \
   author="Maxime Garcia" \
-  description="Picard image for use in CAW" \
+  description="Picard image for use in Sarek" \
   maintainer="maxime.garcia@scilifelab.se"
 
 # Install libraries
@@ -23,6 +23,3 @@ RUN \
   && unzip picard-tools-${PICARD_VERSION}.zip \
   && mv picard-tools-${PICARD_VERSION} ${PICARD_HOME} \
   && rm picard-tools-${PICARD_VERSION}.zip
-
-# Create UPPMAX directories
-RUN mkdir /pica /proj /scratch /sw

@@ -2,7 +2,7 @@ FROM openjdk:8-slim
 
 LABEL \
   author="Maxime Garcia" \
-  description="snpEff image for use in CAW" \
+  description="snpEff image for use in Sarek" \
   maintainer="maxime.garcia@scilifelab.se"
 
 # Install libraries
@@ -27,6 +27,3 @@ RUN \
     http://downloads.sourceforge.net/project/snpeff/snpEff_v${SNPEFF_VERSION}_core.zip \
   && unzip snpEff_v${SNPEFF_VERSION}_core.zip -d /opt/ \
   && rm snpEff_v${SNPEFF_VERSION}_core.zip
-
-# Create UPPMAX directories
-RUN mkdir /pica /proj /scratch /sw

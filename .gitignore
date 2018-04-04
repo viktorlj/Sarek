@@ -1,5 +1,4 @@
 Annotation/
-data/chr17_testdata/
 Preprocessing/
 References/
 Reports/
@@ -9,5 +8,7 @@ work/
 .nextflow*
 *.img
 *.tar.gz
+report.html*
 timeline.html*
 trace.txt*
+.DS_Store

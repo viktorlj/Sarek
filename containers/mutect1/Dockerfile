@@ -2,7 +2,7 @@ FROM openjdk:7-slim
 
 LABEL \
   author="Maxime Garcia" \
-  description="MuTect 1.1.5 image for use in CAW" \
+  description="MuTect 1.1.5 image for use in Sarek" \
   maintainer="maxime.garcia@scilifelab.se"
 
 # Install libraries
@@ -23,5 +23,3 @@ RUN \
   && unzip muTect-${MUTECT_VERSION}-bin.zip -d ${MUTECT_HOME} \
   && rm muTect-${MUTECT_VERSION}-bin.zip \
 && mv ${MUTECT_HOME}/muTect-${MUTECT_VERSION}.jar ${MUTECT_HOME}/muTect.jar
-# Create UPPMAX directories
-RUN mkdir /pica /proj /scratch /sw

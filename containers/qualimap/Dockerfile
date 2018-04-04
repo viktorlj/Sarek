@@ -2,7 +2,7 @@ FROM openjdk:8
 
 LABEL \
   author="Maxime Garcia" \
-  description="Qualimap image for use in CAW" \
+  description="Qualimap image for use in Sarek" \
   maintainer="maxime.garcia@scilifelab.se"
 
 # Install libraries
@@ -23,6 +23,3 @@ RUN \
   && unzip qualimap_v${QUALIMAP_VERSION}.zip -d /opt/ \
   && rm qualimap_v${QUALIMAP_VERSION}.zip \
   && mv /opt/qualimap_v${QUALIMAP_VERSION} /opt/qualimap
-
-# Create UPPMAX directories
-RUN mkdir /pica /proj /scratch /sw
